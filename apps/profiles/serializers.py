@@ -1,33 +1,12 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Post, Comment, UserNet, Message
+from .models import UserNet
 
 
 class UserNetSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = UserNet
-        fields = ("username", "email", "first_name", "last_name", "avatar", "phone")
+        fields = ("username", "user", "email", "first_name", "last_name", "avatar", "phone")
 
-
-class PostSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Post
-        fields = ("username", "text", "image")
-
-
-class CommentSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Comment
-        fields = "__all__"
-
-
-class MessageSerializer(serializers.ModelSerializer):
-    sender = serializers.SlugRelatedField(many=False, slug_field='username', queryset=UserNet.objects.all())
-    receiver = serializers.SlugRelatedField(many=False, slug_field='username', queryset=UserNet.objects.all())
-
-    class Meta:
-        model = Message
-        fields = ['sender', 'receiver', 'message', 'timestamp']

@@ -1,7 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment, UserNet, Message
+from .models import UserNet
 
 admin.site.register(UserNet)
-admin.site.register(Post)
-admin.site.register(Comment)
-admin.site.register(Message)
+
