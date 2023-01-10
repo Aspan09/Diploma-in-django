@@ -24,6 +24,7 @@ class UserNet(AbstractUser):
     first_login = models.DateTimeField(verbose_name='Первый вход', auto_now=True)
     phone = models.CharField(verbose_name='Номер телефона', max_length=20)
     avatar = models.ImageField(verbose_name='Фото пользователя', null=False, upload_to='resource')
+
     bio = models.TextField(max_length=500, blank=True, null=True, verbose_name=u"О себе")
     city = models.CharField(max_length=30, blank=True, null=True, verbose_name=u"Город")
     birth_date = models.DateField(null=True, blank=True, verbose_name=u"Дата рождения")

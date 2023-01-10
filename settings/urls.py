@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from profiles.views import (UserNetAPIList, UserNetAPIUpdate, UserNetAPIDestroy,)
-from user_messages.views import (MessageAPIList, MessageAPIUpdate, MessageAPIDestroy,)
+from user_messages.views import (MessageAPIList, MessageAPIUpdate, MessageAPIDestroy, MessagesAPIPrivate, )
 from posts.views import (PostAPIList, PostAPIUpdate, PostAPIDestroy,
                             CommentAPIList, CommentAPIUpdate, CommentAPIDestroy,)
 from groups.views import (UserSendMessageInGroupSerializerAPIList,
@@ -36,9 +36,11 @@ urlpatterns = [
     path('auth/', include('djoser.urls.authtoken')),
 
     # Messanger
-    path('api/v4/chat/', MessageAPIList.as_view()),
+    path('api/v4/chat_all/', MessageAPIList.as_view()),
     path('api/v4/chat_update/<int:pk>/', MessageAPIUpdate.as_view()),
     path('api/v4/chat_delete/<int:pk>/', MessageAPIDestroy.as_view()),
+
+    path('api/v4/private_message/<slug:user_name>/', MessagesAPIPrivate.as_view()),
 
     # User_send
     path('api/v5/user_send_message_in_group/', UserSendMessageInGroupSerializerAPIList.as_view()),
