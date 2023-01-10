@@ -4,7 +4,7 @@ from pathlib import Path
 from .conf import *
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-sys.path.append("BASE_DIR")
+# sys.path.append("BASE_DIR")
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
 ALLOWED_HOSTS = ["*"]
@@ -70,14 +70,21 @@ WSGI_APPLICATION = 'deploy.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'facebook',
-        'USER': 'postgres',
-        'PASSWORD': 'kelthuzad_2611',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'facebook',
+#         'USER': 'postgres',
+#         'PASSWORD': 'kelthuzad_2611',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
