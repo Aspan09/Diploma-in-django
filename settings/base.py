@@ -20,6 +20,7 @@ DJANGO_AND_THIRD_PARTY_APPS = [
     'djoser',
     'rest_framework.authtoken',
     'corsheaders',
+    'friendship',
 ]
 
 PROJECT_APPS = [

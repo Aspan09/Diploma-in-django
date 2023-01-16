@@ -2,6 +2,26 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
+from friendship.models import Friend, Follow, Block
+from friendship.views import (
+    all_users,
+    block_add,
+    block_remove,
+    blockers,
+    blocking,
+    follower_add,
+    follower_remove,
+    followers,
+    following,
+    friendship_accept,
+    friendship_add_friend,
+    friendship_cancel,
+    friendship_reject,
+    friendship_request_list,
+    friendship_request_list_rejected,
+    friendship_requests_detail,
+    view_friends,
+)
 from profiles.views import (UserNetAPIList, UserNetAPIUpdate, UserNetAPIDestroy,)
 from user_messages.views import (MessageAPIList, MessageAPIUpdate, MessageAPIDestroy, MessagesAPIPrivate, )
 from posts.views import (PostAPIList, PostAPIUpdate, PostAPIDestroy,
@@ -51,6 +71,22 @@ urlpatterns = [
     path('api/v6/groups/', GroupAPIList.as_view()),
     path('api/v6/groups_update/<int:pk>/', GroupAPIUpdate.as_view()),
     path('api/v6/groups_delete/<int:pk>/', GroupAPIDestroy.as_view()),
+
+    # ------------------------------------------------
+    # ADD FRIEND
+    path('api/v7/friend/add/<slug:to_username>/', view=friendship_add_friend, name="friendship_add_friend", ),
+
+    # ------------------------------------------------
+    # ACCEPT FRIEND
+    path('api/v7/friend/accept/<int:friendship_request_id>/', view=friendship_accept, name="friendship_accept", ),
+
+    # ------------------------------------------------
+    # REJECT FRIEND
+    path('api/v7/friend/reject/<int:friendship_request_id>/', view=friendship_reject, name="friendship_reject", ),
+
+    # ------------------------------------------------
+    # FRIENDS VIEW
+    path('api/v7/friends/<slug:username>/', view=view_friends, name="friendship_view_friends", ),
 
 ]
 
